@@ -94,12 +94,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.vaadin.artur</groupId>
-            <artifactId>a-vaadin-helper</artifactId>
-            <version>1.7.1</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>exampledata</artifactId>
             <version>4.1.0</version>
