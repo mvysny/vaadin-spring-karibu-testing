@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 
-@Entity
+@Entity(name = "users")
 public class User extends AbstractEntity {
 
     private String username;
