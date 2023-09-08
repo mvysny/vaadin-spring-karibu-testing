@@ -2,12 +2,19 @@ package com.example.application.views.login;
 
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
+/**
+ * Taken from <a href="https://vaadin.com/docs/latest/security/enabling-security">Securing Spring Boot Applications</a>.
+ */
 @PageTitle("Login")
 @Route(value = "login")
-public class LoginView extends LoginOverlay {
+@AnonymousAllowed
+public class LoginView extends LoginOverlay implements BeforeEnterObserver {
     public LoginView() {
         setAction("login");
 
@@ -22,4 +29,13 @@ public class LoginView extends LoginOverlay {
         setOpened(true);
     }
 
+    @Override
+    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+        if(beforeEnterEvent.getLocation()
+                .getQueryParameters()
+                .getParameters()
+                .containsKey("error")) {
+            setError(true);
+        }
+    }
 }

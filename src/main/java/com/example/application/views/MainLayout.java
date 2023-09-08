@@ -1,6 +1,5 @@
 package com.example.application.views;
 
-import com.example.application.data.entity.User;
 import com.example.application.security.AuthenticatedUser;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.helloworld.HelloWorldView;
@@ -22,6 +21,8 @@ import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -153,11 +154,11 @@ public class MainLayout extends AppLayout {
         Footer layout = new Footer();
         layout.addClassNames("flex", "items-center", "my-s", "px-m", "py-xs");
 
-        Optional<User> maybeUser = authenticatedUser.get();
-        if (maybeUser.isPresent()) {
-            User user = maybeUser.get();
+        UserDetails maybeUser = authenticatedUser.getAuthenticatedUser();
+        if (maybeUser != null) {
+            UserDetails user = maybeUser;
 
-            Avatar avatar = new Avatar(user.getName(), user.getProfilePictureUrl());
+            Avatar avatar = new Avatar(user.getUsername());
             avatar.addClassNames("me-xs");
 
             ContextMenu userMenu = new ContextMenu(avatar);
@@ -166,7 +167,7 @@ public class MainLayout extends AppLayout {
                 authenticatedUser.logout();
             });
 
-            Span name = new Span(user.getName());
+            Span name = new Span(user.getUsername());
             name.addClassNames("font-medium", "text-s", "text-secondary");
 
             layout.add(avatar, name);
