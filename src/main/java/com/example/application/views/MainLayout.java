@@ -1,6 +1,6 @@
 package com.example.application.views;
 
-import com.example.application.security.AuthenticatedUser;
+import com.example.application.security.SecurityService;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.Component;
@@ -25,7 +25,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -61,11 +60,9 @@ public class MainLayout extends AppLayout {
 
     private H1 viewTitle;
 
-    private AuthenticatedUser authenticatedUser;
     private AccessAnnotationChecker accessChecker;
 
-    public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker) {
-        this.authenticatedUser = authenticatedUser;
+    public MainLayout(AccessAnnotationChecker accessChecker) {
         this.accessChecker = accessChecker;
 
         setPrimarySection(Section.DRAWER);
@@ -154,7 +151,7 @@ public class MainLayout extends AppLayout {
         Footer layout = new Footer();
         layout.addClassNames("flex", "items-center", "my-s", "px-m", "py-xs");
 
-        UserDetails maybeUser = authenticatedUser.getAuthenticatedUser();
+        UserDetails maybeUser = SecurityService.getAuthenticatedUser();
         if (maybeUser != null) {
             UserDetails user = maybeUser;
 
@@ -164,7 +161,7 @@ public class MainLayout extends AppLayout {
             ContextMenu userMenu = new ContextMenu(avatar);
             userMenu.setOpenOnClick(true);
             userMenu.addItem("Logout", e -> {
-                authenticatedUser.logout();
+                SecurityService.logout();
             });
 
             Span name = new Span(user.getUsername());

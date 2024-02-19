@@ -1,5 +1,6 @@
 package com.example.application;
 
+import com.example.application.security.SecurityService;
 import com.example.application.views.helloworld.GoodbyeService;
 import com.example.application.views.helloworld.HelloService;
 import com.github.mvysny.kaributesting.mockhttp.MockRequest;
@@ -69,6 +70,8 @@ public abstract class AbstractAppTest {
     }
 
     protected void logout() {
+        // @todo call this instead
+//        SecurityService.logout();
         SecurityContextHolder.getContext().setAuthentication(null);
         if (VaadinServletRequest.getCurrent() != null) {
             final MockRequest request = (MockRequest) VaadinServletRequest.getCurrent().getRequest();
@@ -86,12 +89,8 @@ public abstract class AbstractAppTest {
 
     @AfterEach
     public void tearDown() {
-        MockVaadin.tearDown();
-    }
-
-    @AfterEach
-    public void performLogout() {
         logout();
+        MockVaadin.tearDown();
     }
 
     /**
