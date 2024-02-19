@@ -31,8 +31,8 @@ public class HelloWorldViewTest extends AbstractAppTest {
     @Test
     public void sayHelloWithMockBean() {
         UI.getCurrent().navigate(HelloWorldView.class);
-        _setValue(_get(TextField.class, spec -> spec.withCaption("Your name")), "Martin");
-        _click(_get(Button.class, spec -> spec.withCaption("Say hello")));
+        _setValue(_get(TextField.class, spec -> spec.withLabel("Your name")), "Martin");
+        _click(_get(Button.class, spec -> spec.withText("Say hello")));
         NotificationsKt.expectNotifications("Goodbye, Martin");
     }
 }
