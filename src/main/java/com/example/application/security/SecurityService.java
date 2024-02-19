@@ -3,6 +3,7 @@ package com.example.application.security;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,9 +20,13 @@ public class SecurityService {
     @Nullable
     public static UserDetails getAuthenticatedUser() {
         SecurityContext context = SecurityContextHolder.getContext();
-        Object principal = context.getAuthentication().getPrincipal();
+        final Authentication authentication = context.getAuthentication();
+        if (authentication == null) {
+            return null;
+        }
+        Object principal = authentication.getPrincipal();
         if (principal instanceof UserDetails) {
-            return (UserDetails) context.getAuthentication().getPrincipal();
+            return (UserDetails) authentication.getPrincipal();
         }
         // Anonymous or no authentication.
         return null;

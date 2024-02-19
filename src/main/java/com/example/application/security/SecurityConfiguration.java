@@ -20,8 +20,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfiguration extends VaadinWebSecurity {
 
-    public static final String LOGOUT_URL = "/";
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Delegating the responsibility of general configurations
@@ -42,8 +40,6 @@ public class SecurityConfiguration extends VaadinWebSecurity {
                 .permitAll());
 
         super.configure(http);
-
-
 
         // This is important to register your login view to the
         // view access checker mechanism:
