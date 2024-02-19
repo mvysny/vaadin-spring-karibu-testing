@@ -70,9 +70,7 @@ public abstract class AbstractAppTest {
     }
 
     protected void logout() {
-        // @todo call this instead
-//        SecurityService.logout();
-        SecurityContextHolder.getContext().setAuthentication(null);
+        SecurityService.logout();
         if (VaadinServletRequest.getCurrent() != null) {
             final MockRequest request = (MockRequest) VaadinServletRequest.getCurrent().getRequest();
             request.setUserPrincipalInt(null);
