@@ -13,7 +13,6 @@ import com.vaadin.flow.spring.SpringServlet;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +25,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.security.Principal;
 import java.util.List;
@@ -44,7 +42,6 @@ import java.util.stream.Collectors;
  * and {@link MockRequest#setUserInRole(Function2)}.
  */
 @SpringBootTest
-@DirtiesContext
 @Import(AbstractAppTest.MyTestConfiguration.class)
 public abstract class AbstractAppTest {
     private static final Routes routes = new Routes().autoDiscoverViews("com.example.application");
