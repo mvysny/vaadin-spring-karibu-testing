@@ -8,6 +8,7 @@ import com.github.mvysny.kaributesting.v10.MockVaadin;
 import com.github.mvysny.kaributesting.v10.Routes;
 import com.github.mvysny.kaributesting.v10.spring.MockSpringServlet;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.spring.SpringServlet;
 import kotlin.jvm.functions.Function0;
@@ -48,6 +49,10 @@ public abstract class AbstractAppTest {
 
     @Autowired
     protected ApplicationContext ctx;
+
+    protected static boolean isProductionMode() {
+        return VaadinService.getCurrent().getDeploymentConfiguration().isProductionMode();
+    }
 
     protected void login(String user, String pass, final List<String> roles) {
         // taken from https://www.baeldung.com/manually-set-user-authentication-spring-security

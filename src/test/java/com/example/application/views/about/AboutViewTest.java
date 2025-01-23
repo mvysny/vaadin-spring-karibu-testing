@@ -2,8 +2,6 @@ package com.example.application.views.about;
 
 import com.example.application.AbstractAppTest;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.router.NotFoundException;
-import com.vaadin.flow.router.internal.ErrorStateRenderer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +28,10 @@ class AboutViewTest extends AbstractAppTest {
         final RuntimeException ex = assertThrows(RuntimeException.class, () -> {
             UI.getCurrent().navigate(AboutView.class);
         });
-        assertTrue(ex.getMessage().contains("Access is denied by annotations on the view"), ex.getMessage());
+        if (!isProductionMode()) {
+            assertTrue(ex.getMessage().contains("Access is denied by annotations on the view"), ex.getMessage());
+        } else {
+            // no error message in production mode. This is by design: Vaadin avoids giving info to a potential attacker.
+        }
     }
 }
