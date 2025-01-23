@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- Vaadin project from https://start.vaadin.com/project/77a37d10-6abe-41c3-9260-5986ce0f0500 -->
     <groupId>com.example.application</groupId>
-    <artifactId>myapp</artifactId>
-    <name>Project base for Spring Boot and Vaadin Flow</name>
+    <artifactId>vaadin-spring-karibu-testing</artifactId>
+    <name>Demoes Vaadin+Spring testing with Karibu-Testing</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
