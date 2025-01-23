@@ -30,9 +30,6 @@ class AboutViewTest extends AbstractAppTest {
         final RuntimeException ex = assertThrows(RuntimeException.class, () -> {
             UI.getCurrent().navigate(AboutView.class);
         });
-        // in production mode, the `Access denied` is omitted
-//        assertTrue(ex.getMessage().contains("No route found for 'about': Access denied"), ex.getMessage());
-        // in newest Vaadin 24 something changed and some ridiculous ErrorStateRenderer$ExceptionsTrace is thrown. Whatever.
-        assertTrue(ex.getMessage().contains("Exceptions handled by HasErrorParameter views are"), ex.getMessage());
+        assertTrue(ex.getMessage().contains("Access is denied by annotations on the view"), ex.getMessage());
     }
 }
