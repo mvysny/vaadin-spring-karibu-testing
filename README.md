@@ -17,6 +17,8 @@ Demoes:
 - Demoes fake/test implementations for services. See the `AbstractAppTest.MyTestConfiguration`
   class for details.
 
+[Live demo running on v-herd](https://v-herd.eu/vaadin-spring-karibu-testing).
+
 ## Running the application
 
 The project is a standard Maven project. To run it from the command line,
